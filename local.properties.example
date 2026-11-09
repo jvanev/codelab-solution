@@ -1,0 +1,7 @@
+# This file serves as an example of what the actual "local.properties" file should include,
+# in addition to the standard "sdk.dir", in order to for the Google Maps API key
+# to be added to the AndroidManifest.xml file.
+#
+# Please, replace "DEFAULT_API_KEY" with the actual Google Maps API key while adding
+# this property to the "local.properties" file in your project.
+GOOGLE_MAPS_API_KEY=DEFAULT_KEY

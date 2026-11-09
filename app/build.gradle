@@ -1,0 +1,107 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace "com.sap.codelab"
+    compileSdk = 36
+    buildToolsVersion '36.0.0'
+    defaultConfig {
+        applicationId "com.sap.codelab"
+        minSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        // Manually load the Google Maps API key from the local.properties file,
+        // and add it to the AndroidManifest.xml file
+        Properties properties = new Properties()
+        File propertiesFile = file("../local.properties")
+
+        if (!propertiesFile.exists()) {
+            throw new FileNotFoundException("local.properties not found")
+        }
+
+        propertiesFile.withInputStream { stream ->
+            properties.load(stream)
+        }
+
+        String apiKey = properties.getProperty("GOOGLE_MAPS_API_KEY", null)
+
+        if (apiKey == null) {
+            throw new IllegalStateException(
+                "Couldn't find property \"GOOGLE_MAPS_API_KEY\" in local.properties. Add it with your Google Maps API key"
+            )
+        }
+
+        manifestPlaceholders = [
+            GOOGLE_MAPS_API_KEY: apiKey
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+}
+
+kotlin {
+    target {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_21
+        }
+    }
+}
+
+ext {
+    kotlinCoroutinesVersion = '1.10.2'
+    roomVersion = '2.7.2'
+    lifecycleVersion = '2.9.3'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.core:core-ktx:1.17.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'com.google.android.material:material:1.12.0'
+
+    //Lifecycle, LiveData and ViewModel dependencies
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+
+    //WorkManager
+    implementation "androidx.work:work-runtime-ktx:2.12.0"
+
+    //Room persistence
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    ksp "androidx.room:room-compiler:$roomVersion"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+
+    //Play Services
+    implementation "com.google.android.gms:play-services-location:21.4.0"
+    implementation "com.google.android.gms:play-services-maps:20.1.0"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+}

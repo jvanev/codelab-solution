@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">SAP Codelab</string>
+    <string name="action_show_all">Show All</string>
+    <string name="action_show_open">Show Open</string>
+    <string name="memo_title">Title</string>
+    <string name="new_memo">New Memo</string>
+    <string name="memo_text">Text</string>
+    <string name="action_save">Save</string>
+    <string name="memo_title_empty_error">Please provide a title for this memo</string>
+    <string name="memo_text_empty_error">Please provide a memo description</string>
+    <string name="memo_location_empty_error">Please provide a memo location</string>
+    <string name="notification_channel_name">Memo</string>
+    <string name="memo_save_failed">Failed to save your memo, please try again</string>
+    <string name="memo_geofences_limit">Reminder limit reached</string>
+    <string name="memo_geofences_limit_description">
+        You can have up to 100 active location reminders.
+        This memo’s reminder will replace the reminder of your oldest open memo,
+        which will no longer notify you when you’re nearby.
+    </string>
+    <string name="button_dismiss">Dismiss</string>
+    <string name="button_grant">Grant</string>
+    <string name="button_retry">Retry</string>
+    <string name="location_permissions">Location Permissions</string>
+    <string name="missing_permissions">
+        SAP Code is not allowed to access your location, and won\'t be able to notify you when you
+        are near your new memo. Would you like to grant access?
+    </string>
+</resources>

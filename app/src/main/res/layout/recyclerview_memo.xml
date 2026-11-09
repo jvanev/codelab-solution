@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerView_memo_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/memoTitle"
+        style="@style/MemoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/checkBox"
+        android:textIsSelectable="false"
+        tools:text="This is a title" />
+
+    <TextView
+        android:id="@+id/memoText"
+        style="@style/MemoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/memoTitle"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/checkBox"
+        android:textIsSelectable="false"
+        tools:text="This is a text" />
+</RelativeLayout>
